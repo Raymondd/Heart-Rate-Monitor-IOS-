@@ -413,6 +413,7 @@
 				9FBA6F2B1AAD39A800F1EB4C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		9FBA6F2C1AAD39A800F1EB4C /* Build configuration list for PBXNativeTarget "LabFourTests" */ = {
 			isa = XCConfigurationList;
@@ -421,6 +422,7 @@
 				9FBA6F2E1AAD39A800F1EB4C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

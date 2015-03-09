@@ -73,6 +73,24 @@ class FaceViewController: UIViewController {
         //starting the video manager
         self.videoManager.start()
     }
+    
+    //toggle the camera position
+    @IBAction func toggle_camera(sender: AnyObject) {
+        videoManager.toggleCameraPosition()
+    }
+    
+    //These two overrides ensure there is only one video manager running at a time in our application
+    override func viewDidAppear(animated: Bool) {
+        if(!self.videoManager.isRunning){
+            self.videoManager.start()
+        }
+    }
+    
+    override func viewDidDisappear(animated: Bool) {
+        if(self.videoManager.isRunning){
+            self.videoManager.stop()
+        }
+    }
 
 
 }
