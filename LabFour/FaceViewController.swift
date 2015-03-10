@@ -7,28 +7,10 @@ import UIKit
 import AVFoundation
 
 class FaceViewController: UIViewController {
-
     var videoManager : VideoAnalgesic! = nil
-    let filter :CIFilter = CIFilter(name: "CIBumpDistortion")
-    
-   /* @IBAction func panRecognized(sender: AnyObject) {
-        let point = sender.translationInView(self.view)
-        
-        var swappedPoint = CGPoint()
-        
-        // convert coordinates from UIKit to core image
-        var transform = CGAffineTransformIdentity
-        transform = CGAffineTransformConcat(transform, CGAffineTransformMakeRotation(CGFloat(M_PI_2)))
-        transform = CGAffineTransformConcat(transform, CGAffineTransformMakeScale(-1.0, 1.0))
-        transform = CGAffineTransformTranslate(transform, self.view.bounds.size.width/2,
-            self.view.bounds.size.height/2)
-        
-        swappedPoint = CGPointApplyAffineTransform(point, transform);
-        
-//        filter.setValue(CIVector(CGPoint: swappedPoint), forKey: "inputCenter")
-
-    }*/
-    
+    let faceFilter :CIFilter = CIFilter(name: "CIRadialGradient")
+    let eyeFilter :CIFilter = CIFilter(name: "CIRadialGradient")
+    let mouthFilter :CIFilter = CIFilter(name: "CIRadialGradient")
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,8 +22,16 @@ class FaceViewController: UIViewController {
         //controls which camera we use
         self.videoManager.setCameraPosition(AVCaptureDevicePosition.Front)
         
-        self.filter.setValue(-0.5, forKey: "inputScale")
-        filter.setValue(75, forKey: "inputRadius")
+        let redColor = CIColor(red: 2.0, green: 0.2, blue: 0.2, alpha: 0.5)
+        let blueColor = CIColor(red: 0.2, green: 0.2, blue: 2.0, alpha: 0.5)
+        let greenColor = CIColor(red: 0.2, green: 2.0, blue: 0.2, alpha: 0.2)
+        let clear = CIColor(red: 1, green: 1, blue: 1, alpha: 0.0)
+        self.faceFilter.setValue(clear, forKey: "inputColor0")
+        self.faceFilter.setValue(greenColor, forKey: "inputColor1")
+        self.eyeFilter.setValue(clear, forKey: "inputColor0")
+        self.eyeFilter.setValue(redColor, forKey: "inputColor1")
+        self.mouthFilter.setValue(clear, forKey: "inputColor0")
+        self.mouthFilter.setValue(blueColor, forKey: "inputColor1")
         
         //creting a detection shceme for you faces
         let optsDetector = [CIDetectorAccuracy:CIDetectorAccuracyLow]
@@ -57,31 +47,81 @@ class FaceViewController: UIViewController {
             
             var features = detector.featuresInImage(imageInput, options: optsFace)
             var swappedPoint = CGPoint()
+            var imageBuffer = imageInput
+            
             for f in features as [CIFaceFeature]{
-                NSLog("%@",f)
+                let faceWidth = f.bounds.size.width;
+                let faceHeight = f.bounds.size.height;
                 swappedPoint.x = f.bounds.midX
                 swappedPoint.y = f.bounds.midY
-                self.filter.setValue(CIVector(CGPoint: swappedPoint), forKey: "inputCenter")
+                
+                //setting up the face gradient
+                self.faceFilter.setValue(CIVector(CGPoint: swappedPoint), forKey: "inputCenter")
+                self.faceFilter.setValue(faceWidth/2 , forKey: "inputRadius0")
+                self.faceFilter.setValue(faceWidth/2 - 10, forKey: "inputRadius1")
+                let combineFilter :CIFilter = CIFilter(name: "CISourceOverCompositing")
+                combineFilter.setValue(self.faceFilter.outputImage, forKey: "inputImage")
+                combineFilter.setValue(imageBuffer, forKey: "inputBackgroundImage")
+                imageBuffer = combineFilter.outputImage
+                
+                if (f.hasLeftEyePosition){
+                    //println("Left eye: ", f.leftEyePosition.x, f.leftEyePosition.y);
+                    swappedPoint.x = f.leftEyePosition.x
+                    swappedPoint.y = f.leftEyePosition.y
+                    self.eyeFilter.setValue(CIVector(CGPoint: swappedPoint), forKey: "inputCenter")
+                    self.eyeFilter.setValue(faceWidth/12, forKey: "inputRadius0")
+                    self.eyeFilter.setValue(faceWidth/12 - 5, forKey: "inputRadius1")
+                    
+                    
+                    combineFilter.setValue(self.eyeFilter.outputImage, forKey: "inputImage")
+                    combineFilter.setValue(imageBuffer, forKey: "inputBackgroundImage")
+                    imageBuffer = combineFilter.outputImage
+                }
+                
+                if (f.hasRightEyePosition){
+                    //println("Right eye: ", f.rightEyePosition.x, f.rightEyePosition.y);
+                    swappedPoint.x = f.rightEyePosition.x
+                    swappedPoint.y = f.rightEyePosition.y
+                    self.eyeFilter.setValue(CIVector(CGPoint: swappedPoint), forKey: "inputCenter")
+                    self.eyeFilter.setValue(faceWidth/12, forKey: "inputRadius0")
+                    self.eyeFilter.setValue(faceWidth/12 - 5, forKey: "inputRadius1")
+                    
+                    
+                    combineFilter.setValue(self.eyeFilter.outputImage, forKey: "inputImage")
+                    combineFilter.setValue(imageBuffer, forKey: "inputBackgroundImage")
+                    imageBuffer = combineFilter.outputImage
+                }
+                
+                
+                if (f.hasMouthPosition){
+                    //print("Mouth: ", f.mouthPosition.x, f.mouthPosition.y);
+                    swappedPoint.x = f.mouthPosition.x
+                    swappedPoint.y = f.mouthPosition.y
+                    self.mouthFilter.setValue(CIVector(CGPoint: swappedPoint), forKey: "inputCenter")
+                    self.mouthFilter.setValue(faceWidth/7, forKey: "inputRadius0")
+                    self.mouthFilter.setValue(faceWidth/7 - 10, forKey: "inputRadius1")
+                    
+                    
+                    combineFilter.setValue(self.mouthFilter.outputImage, forKey: "inputImage")
+                    combineFilter.setValue(imageBuffer, forKey: "inputBackgroundImage")
+                    imageBuffer = combineFilter.outputImage
+                }
             }
             
             
-            self.filter.setValue(imageInput, forKey: kCIInputImageKey)
-            return self.filter.outputImage
+            return imageBuffer
         })
         
         
         //starting the video manager
-        self.videoManager.start()
-    }
-    
-    //toggle the camera position
-    @IBAction func toggle_camera(sender: AnyObject) {
-        videoManager.toggleCameraPosition()
+        if !self.videoManager.isRunning{
+            self.videoManager.start()
+        }
     }
     
     //These two overrides ensure there is only one video manager running at a time in our application
     override func viewDidAppear(animated: Bool) {
-        if(!self.videoManager.isRunning){
+        if !self.videoManager.isRunning{
             self.videoManager.start()
         }
     }
@@ -89,6 +129,7 @@ class FaceViewController: UIViewController {
     override func viewDidDisappear(animated: Bool) {
         if(self.videoManager.isRunning){
             self.videoManager.stop()
+            self.videoManager.shutdown()
         }
     }
 
