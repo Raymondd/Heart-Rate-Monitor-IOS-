@@ -7,14 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9FAB50161AB92A9900D8500E /* HeartRateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FAB50151AB92A9900D8500E /* HeartRateViewController.swift */; };
+		9FAB50181AB92BA400D8500E /* VideoAnalgesic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FAB50171AB92BA400D8500E /* VideoAnalgesic.swift */; };
 		9FBA6F101AAD39A800F1EB4C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FBA6F0F1AAD39A800F1EB4C /* AppDelegate.swift */; };
 		9FBA6F151AAD39A800F1EB4C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9FBA6F131AAD39A800F1EB4C /* Main.storyboard */; };
 		9FBA6F171AAD39A800F1EB4C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9FBA6F161AAD39A800F1EB4C /* Images.xcassets */; };
 		9FBA6F1A1AAD39A800F1EB4C /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9FBA6F181AAD39A800F1EB4C /* LaunchScreen.xib */; };
 		9FBA6F261AAD39A800F1EB4C /* LabFourTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FBA6F251AAD39A800F1EB4C /* LabFourTests.swift */; };
 		9FBA6F301AAD3C0900F1EB4C /* FaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FBA6F2F1AAD3C0900F1EB4C /* FaceViewController.swift */; };
-		9FBA6F321AAD3C3100F1EB4C /* VideoAnalgesic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FBA6F311AAD3C3100F1EB4C /* VideoAnalgesic.swift */; };
-		9FBA6F361AAD3F0700F1EB4C /* HeartRateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FBA6F351AAD3F0700F1EB4C /* HeartRateViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -28,6 +28,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9FAB50151AB92A9900D8500E /* HeartRateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeartRateViewController.swift; sourceTree = "<group>"; };
+		9FAB50171AB92BA400D8500E /* VideoAnalgesic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoAnalgesic.swift; sourceTree = "<group>"; };
 		9FBA6F0A1AAD39A800F1EB4C /* LabFour.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LabFour.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9FBA6F0E1AAD39A800F1EB4C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9FBA6F0F1AAD39A800F1EB4C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -38,8 +40,6 @@
 		9FBA6F241AAD39A800F1EB4C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9FBA6F251AAD39A800F1EB4C /* LabFourTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabFourTests.swift; sourceTree = "<group>"; };
 		9FBA6F2F1AAD3C0900F1EB4C /* FaceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FaceViewController.swift; sourceTree = "<group>"; };
-		9FBA6F311AAD3C3100F1EB4C /* VideoAnalgesic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoAnalgesic.swift; sourceTree = "<group>"; };
-		9FBA6F351AAD3F0700F1EB4C /* HeartRateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HeartRateViewController.swift; path = ../HeartRateViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,8 +83,8 @@
 			children = (
 				9FBA6F0F1AAD39A800F1EB4C /* AppDelegate.swift */,
 				9FBA6F2F1AAD3C0900F1EB4C /* FaceViewController.swift */,
-				9FBA6F351AAD3F0700F1EB4C /* HeartRateViewController.swift */,
 				9FBA6F131AAD39A800F1EB4C /* Main.storyboard */,
+				9FAB50151AB92A9900D8500E /* HeartRateViewController.swift */,
 				9FBA6F161AAD39A800F1EB4C /* Images.xcassets */,
 				9FBA6F181AAD39A800F1EB4C /* LaunchScreen.xib */,
 				9FBA6F0D1AAD39A800F1EB4C /* Supporting Files */,
@@ -95,7 +95,7 @@
 		9FBA6F0D1AAD39A800F1EB4C /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				9FBA6F311AAD3C3100F1EB4C /* VideoAnalgesic.swift */,
+				9FAB50171AB92BA400D8500E /* VideoAnalgesic.swift */,
 				9FBA6F0E1AAD39A800F1EB4C /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -218,10 +218,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9FBA6F321AAD3C3100F1EB4C /* VideoAnalgesic.swift in Sources */,
 				9FBA6F301AAD3C0900F1EB4C /* FaceViewController.swift in Sources */,
+				9FAB50181AB92BA400D8500E /* VideoAnalgesic.swift in Sources */,
 				9FBA6F101AAD39A800F1EB4C /* AppDelegate.swift in Sources */,
-				9FBA6F361AAD3F0700F1EB4C /* HeartRateViewController.swift in Sources */,
+				9FAB50161AB92A9900D8500E /* HeartRateViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
