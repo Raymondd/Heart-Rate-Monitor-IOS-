@@ -41,6 +41,9 @@ class HeartRateViewController: UIViewController {
         
     }
     
+    @IBAction func toggle_camera(sender: AnyObject) {
+            videoManager.toggleCameraPosition()
+    }
     
     override func viewDidDisappear(animated: Bool) {
         if(self.videoManager.isRunning){

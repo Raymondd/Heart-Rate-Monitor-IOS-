@@ -113,13 +113,30 @@
                                     <action selector="toggle_camera:" destination="ZJe-is-Y7z" eventType="touchUpInside" id="zDd-bV-XMa"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="happy_open_open.png" translatesAutoresizingMaskIntoConstraints="NO" id="c0T-SU-Zkj">
+                                <rect key="frame" x="16" y="518" width="62" height="62"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZuS-Jk-dui">
+                                <rect key="frame" x="35" y="526" width="25" height="45"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="46"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="IrF-fo-Wxl" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailingMargin" id="CWq-9X-LeG"/>
+                            <constraint firstItem="ZuS-Jk-dui" firstAttribute="centerY" secondItem="c0T-SU-Zkj" secondAttribute="centerY" constant="-0.5" id="EPx-Su-xJ4"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="IrF-fo-Wxl" secondAttribute="bottom" constant="20" id="X32-1w-0hZ"/>
+                            <constraint firstItem="ZuS-Jk-dui" firstAttribute="centerX" secondItem="c0T-SU-Zkj" secondAttribute="centerX" constant="0.5" id="Yqd-DY-lkM"/>
+                            <constraint firstItem="c0T-SU-Zkj" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="c2r-0W-nQt"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="c0T-SU-Zkj" secondAttribute="bottom" constant="20" id="yNT-18-ELb"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="face" destination="c0T-SU-Zkj" id="Pei-Ax-fXt"/>
+                        <outlet property="numFaces" destination="ZuS-Jk-dui" id="aF6-oT-bE5"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
@@ -160,6 +177,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="happy_open_open.png" width="85" height="85"/>
         <image name="toggle_button" width="57" height="57"/>
     </resources>
 </document>
